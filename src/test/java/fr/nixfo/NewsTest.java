@@ -1,6 +1,5 @@
 package fr.nixfo;
 
-import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 import static org.junit.jupiter.api.Assertions.*;
 
 import fr.nixfo.external.newspaper.NewspaperArticle;
@@ -10,6 +9,7 @@ import fr.nixfo.external.twitter.Tweet;
 import org.junit.jupiter.api.Test;
 
 import java.awt.image.BufferedImage;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +17,14 @@ class NewsTest {
 
     @Test
     public void adapt_newspaper_article() {
-        NewspaperArticle newspaperArticle = new NewspaperArticle("Article's title", new Date(), "John Doe", new BufferedImage(640, 480, TYPE_INT_RGB));
+        NewspaperArticle newspaperArticle = new NewspaperArticle("Article's title", "Hello, this is my article.", new Date(2022, Calendar.MAY, 12),
+                "John Doe", new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB));
 
-
+        News newsAdapted = null;
+        assertEquals(newsAdapted.getAuthor().getFirstName(), "John");
+        assertEquals(newsAdapted.getAuthor().getLastName(), "Doe");
+        assertEquals(newsAdapted.getTitle(), "Article's title");
+        assertEquals(newsAdapted.getContent(), "Hello, this is my article.");
     }
 
     @Test
@@ -40,6 +45,11 @@ class NewsTest {
             null
         );
 
+        News newsAdapted = null;
+        assertEquals(newsAdapted.getAuthor().getFirstName(), "Twitter Dev (@TwitterDev)");
+        assertEquals(newsAdapted.getTitle(), "Tweet from @TwitterDev");
+        assertEquals(newsAdapted.getContent(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget risus est. Aliquam erat volutpat. Pellentesque quis orci libero.");
+        assertEquals(newsAdapted.getKeywords(), List.of("Lorem ipsum", "Aliquam erat"));
     }
 
     @Test
@@ -58,7 +68,6 @@ class NewsTest {
                 false,
                 null
         );
-
         Tweet tweet1 = new Tweet(
                 1050118621198921728L,
                 "Pellentesque quis orci libero.",
@@ -73,8 +82,6 @@ class NewsTest {
                 false,
                 tweet2
         );
-
-
         Tweet tweet = new Tweet(
             1050118621198921728L,
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget risus est. Aliquam erat volutpat.",
@@ -91,13 +98,14 @@ class NewsTest {
             tweet1
         );
 
-
         News newsAdapted = null;
-        assertEquals(newsAdapted.getAuthor(), "Twitter Dev (@TwitterDev)");
+        assertEquals(newsAdapted.getAuthor().getFirstName(), "Twitter Dev (@TwitterDev)");
+        assertEquals(newsAdapted.getTitle(), "Thread from @TwitterDev");
         assertEquals(newsAdapted.getContent(),
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget risus est. Aliquam erat volutpat." +
                         "Pellentesque quis orci libero." +
                         "Nam arcu ante, molestie nec dignissim et, malesuada eget dui.");
+        assertEquals(newsAdapted.getKeywords(), List.of("Lorem ipsum", "Aliquam erat", "Pellentesque"));
     }
 
 }
