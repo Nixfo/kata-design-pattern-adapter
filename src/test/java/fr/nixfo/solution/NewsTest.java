@@ -1,11 +1,10 @@
-package fr.nixfo;
+package fr.nixfo.solution;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import fr.nixfo.News;
 import fr.nixfo.external.newspaper.NewspaperArticle;
 import fr.nixfo.external.twitter.Annotation;
-import fr.nixfo.external.twitter.User;
 import fr.nixfo.external.twitter.Tweet;
+import fr.nixfo.external.twitter.User;
 import org.junit.jupiter.api.Test;
 
 import java.awt.image.BufferedImage;
@@ -14,14 +13,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class NewsTest {
 
     @Test
     public void adapt_newspaper_article() {
-        NewspaperArticle newspaperArticle = new NewspaperArticle("Article's title", "Hello, this is my article.", new Date(2022, Calendar.MAY, 12),
+        NewspaperArticle newspaperArticle = new NewspaperArticle("Article's title", "Hello, this is my article.", new Date(122, Calendar.MAY, 12),
                 "John Doe", new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB));
 
-        News newsAdapted = null;
+        News newsAdapted = new NewspaperArticleAdapter(newspaperArticle);
         assertEquals("John", newsAdapted.getAuthor().getFirstName());
         assertEquals("Doe", newsAdapted.getAuthor().getLastName());
         assertEquals("Article's title", newsAdapted.getTitle());

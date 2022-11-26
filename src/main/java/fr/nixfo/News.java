@@ -11,6 +11,9 @@ public class News {
     private LocalDate date;
     private List<String> keywords;
 
+    public News() {
+    }
+
     public News(Author author, String title, String content, String summary, LocalDate date, List<String> keywords) {
         this.author = author;
         this.title = title;
