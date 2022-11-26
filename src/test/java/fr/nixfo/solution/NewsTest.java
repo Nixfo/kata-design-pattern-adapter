@@ -48,7 +48,7 @@ class NewsTest {
                 null
         );
 
-        News newsAdapted = null;
+        News newsAdapted = new TweetAdapter(tweet);
         assertEquals("Twitter Dev (@TwitterDev)", newsAdapted.getAuthor().getFirstName());
         assertEquals("Tweet from @TwitterDev", newsAdapted.getTitle());
         assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget risus est. Aliquam erat volutpat. Pellentesque quis orci libero.", newsAdapted.getContent());
@@ -101,7 +101,7 @@ class NewsTest {
                 tweet1
         );
 
-        News newsAdapted = null;
+        News newsAdapted = new TweetAdapter(tweet);
         assertEquals("Twitter Dev (@TwitterDev)", newsAdapted.getAuthor().getFirstName());
         assertEquals("Thread from @TwitterDev", newsAdapted.getTitle());
         assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget risus est. Aliquam erat volutpat." +

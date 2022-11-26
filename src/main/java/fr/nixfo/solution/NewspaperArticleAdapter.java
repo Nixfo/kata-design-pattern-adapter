@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class NewspaperArticleAdapter extends News {
-    NewspaperArticle newspaperArticle;
+    private final NewspaperArticle newspaperArticle;
 
     public NewspaperArticleAdapter(NewspaperArticle newspaperArticle) {
         this.newspaperArticle = newspaperArticle;
