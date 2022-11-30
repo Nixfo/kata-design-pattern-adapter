@@ -18,7 +18,7 @@ class NewsTest {
 
     @Test
     public void adapt_newspaper_article() {
-        NewspaperArticle newspaperArticle = new NewspaperArticle("Article's title", "Hello, this is my article.", new Date(2022, Calendar.MAY, 12),
+        NewspaperArticle newspaperArticle = new NewspaperArticle("Article's title", "Hello, this is my article.", new Date(122, Calendar.MAY, 12),
                 "John Doe", new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB));
 
         News newsAdapted = null;
